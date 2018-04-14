@@ -22,6 +22,9 @@ Puppet::Type.type(:midonet_host_registry).provide(:midonet_api_caller) do
       message['name'] = resource[:tunnelzone_name]
       message['type'] = resource[:tunnelzone_type]
       tz = call_create_tunnelzone(message)
+      if tz.count < 1
+        raise "Unable to create tunnel zone '#{message['name']}' of type '#{message['type']}'"
+      end
       tz_id = tz[0]['id']
     else
       tz_type = tz[0]['type']
