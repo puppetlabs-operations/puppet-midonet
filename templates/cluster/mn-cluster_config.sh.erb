@@ -48,8 +48,12 @@ cluster.auth {
   keystone.protocol = "<%= @keystone_protocol %>"
   keystone.domain_name = "<%= @keystone_domain_name %>"
   keystone.domain_id = "<%= @keystone_domain_id %>"
+  <%- if @keystone_user_name -%>
   keystone.user_name = "<%= @keystone_user_name %>"
+  <%- end -%>
+  <%- if @keystone_user_password -%>
   keystone.user_password = "<%= @keystone_user_password %>"
+  <%- end -%>
   keystone.version = <%= @keystone_keystone_version %>
 }
 cluster.rest_api {
