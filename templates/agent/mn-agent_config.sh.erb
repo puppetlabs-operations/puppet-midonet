@@ -8,9 +8,15 @@ which mn-conf > /dev/null || {
 }
 
 ## Configure MidoNet Metadata Proxy
+<%- if @controller_host -%>
 echo "agent.openstack.metadata.nova_metadata_url : \"http://<%= @controller_host %>:<%= @metadata_port %>\"" | mn-conf set -t default
+<%- end -%>
+<%- if @shared_secret -%>
 echo "agent.openstack.metadata.shared_secret : <%= @shared_secret %>" | mn-conf set -t default
+<%- end -%>
+<%- if @controller_host -%>
 echo "agent.openstack.metadata.enabled : true" | mn-conf set -t default
+<%- end -%>
 <% if @dhcp_mtu %>
   echo "agent.midolman.dhcp_mtu : <% @dhcp_mtu %>" | mn-conf set -t default
 <% end %>
